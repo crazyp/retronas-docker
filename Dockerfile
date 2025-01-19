@@ -19,7 +19,7 @@ RUN apt-get install -y python3-pkg-resources python3-pygments python3-pyparsing 
 RUN apt-get install -y python3-requests-ntlm python3-requests-toolbelt python3-resolvelib python3-rfc3986 python3-rich python3-selinux
 RUN apt-get install -y python3-simplejson python3-six python3-sniffio python3-tz python3-urllib3 python3-winrm python3-xmltodict
 RUN apt-get install -y cowsay sshpass gettext-base
-RUN apt-get install -y git-doc git-email git-gui gitk gitweb git-cvs git-mediawiki git-svn gdbm-l10n keychain libpam-ssh monkeysphere
+RUN apt-get install -y git-doc git-email git-gui gitk gitweb git-cvs git-mediawiki git-svn gdbm-l10n keychain libpam-ssh-agent-auth
 RUN apt-get install -y ssh-askpass ed diffutils-doc perl-doc libterm-readline-gnu-perl libterm-readline-perl-perl make libtap-harness-archive-perl
 RUN apt-get install -y python3-doc python3-tk python3-venv python-cryptography-doc python3-cryptography-vectors python3-trio python3-aioquic
 RUN apt-get install -y python-jinja2-doc python-lockfile-doc ipython3 python-netaddr-docs python3-setuptools python-pygments-doc ttf-bitstream-vera
