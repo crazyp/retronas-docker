@@ -1,4 +1,4 @@
-FROM debian:bullseye
+FROM debian:latest
 
 RUN apt-get update -y && \
 	apt-get install sudo curl iproute2 systemctl -y
