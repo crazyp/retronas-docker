@@ -1,7 +1,6 @@
 FROM debian:latest
 # Create a home directory for the user
-RUN groupadd -g 1000
-RUN useradd -u 1000 -g 1000 -p raspberry -m pi
+RUN useradd -u -p raspberry -m pi
 RUN usermod -aG sudo pi
 USER pi
 # Create a volume for the home directory
