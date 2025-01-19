@@ -22,7 +22,7 @@ RUN apt-get install -y cowsay sshpass gettext-base
 RUN apt-get install -y git-doc git-email git-gui gitk gitweb git-cvs git-mediawiki git-svn gdbm-l10n keychain libpam-ssh-agent-auth
 RUN apt-get install -y ssh-askpass ed diffutils-doc perl-doc libterm-readline-gnu-perl libterm-readline-perl-perl make libtap-harness-archive-perl
 RUN apt-get install -y python3-doc python3-tk python3-venv python-cryptography-doc python3-cryptography-vectors python3-trio
-RUN apt-get install -y python-jinja2-doc python-lockfile-doc ipython3 python-netaddr-docs python3-setuptools python-pygments-doc ttf-bitstream-vera
+RUN apt-get install -y python-jinja2-doc python-lockfile-doc ipython3 python3-setuptools python-pygments-doc ttf-bitstream-vera
 RUN apt-get install -y python-pyparsing-doc python3-openssl python3-socks python-requests-doc python3-brotli python3.11-venv python3.11-doc
 RUN apt-get install -y binutils binfmt-support
 RUN curl -o /tmp/install_retronas.sh https://raw.githubusercontent.com/danmons/retronas/main/install_retronas.sh
