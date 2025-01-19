@@ -6,7 +6,7 @@ on:
     branches:
       - main
     paths:
-      - 'one-container/pihole-unbound/Dockerfile'
+      - 'Dockerfile'
 
 jobs:
   publish-image:
@@ -58,13 +58,7 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Extract Pihole version from Dockerfile
-        id: extract-version
-        run: |
-          VERSION=$(grep -oP '(?<=pihole/pihole:)\S+' one-container/pihole-unbound/Dockerfile)
-          echo "Extracted pihole version is: $VERSION"
-          echo "PIHOLE_VERSION=$VERSION" >> "$GITHUB_OUTPUT"
-
+     
       # Extract metadata (tags, labels) for Docker
       # https://github.com/docker/metadata-action
       - name: Extract Docker metadata
@@ -73,11 +67,11 @@ jobs:
         with:
           # List of Docker images to use as base name for tags
           images: |
-            docker.io/${{ vars.DOCKERHUB_USERNAME }}/docker-pihole-unbound
-            ghcr.io/${{ github.repository_owner }}/docker-pihole-unbound    
+            docker.io/${{ vars.DOCKERHUB_USERNAME }}retronas-docker
+            ghcr.io/${{ github.repository_owner }}/retronas-docker    
           # Generate Docker tags based on the following events/attributes
           tags: |
-            type=raw,value=${{ steps.extract-version.outputs.PIHOLE_VERSION }}
+            #type=raw,value=${{ steps.extract-version.outputs.PIHOLE_VERSION }}
             type=raw,value=latest
           # Set the OCI Image Specification source label to the base image repository, to enable tools 
           # like Renovate and Dependabot to automatically fetch release notes for new versions.
@@ -91,7 +85,7 @@ jobs:
         id: build-and-push
         uses: docker/build-push-action@v6.8.0
         with:
-          context: one-container/pihole-unbound
+          context: docker-retronas
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
@@ -118,14 +112,5 @@ jobs:
         with:
           tag_name: ${{ steps.extract-version.outputs.PIHOLE_VERSION }}
           body: |
-            #### This is an update for the `one-container` configuration
 
-            - Updating Pi-Hole base image to `${{ steps.extract-version.outputs.PIHOLE_VERSION }}` ([link](https://github.com/pi-hole/docker-pi-hole/releases/tag/${{ steps.extract-version.outputs.PIHOLE_VERSION }}))
-
-            #### Update instructions
-
-            ```shell
-            docker-compose pull
-            docker-compose up -d
-            ```
-          make_latest: true
+            
