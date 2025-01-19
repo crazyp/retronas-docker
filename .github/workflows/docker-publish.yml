@@ -6,7 +6,7 @@ on:
     branches:
       - main
     paths:
-      - 'Dockerfile'
+      - './Dockerfile'
 
 jobs:
   publish-image:
@@ -61,12 +61,12 @@ jobs:
      
       # Extract metadata (tags, labels) for Docker
       # https://github.com/docker/metadata-action
-      - name: Extract Docker metadata
-        id: meta
-        uses: docker/metadata-action@v5.5.1
-        with:
+      #- name: Extract Docker metadata
+        #id: meta
+        #uses: docker/metadata-action@v5.5.1
+        #with:
           # List of Docker images to use as base name for tags
-          images: |
+          #images: |
             #docker.io/${{ vars.DOCKERHUB_USERNAME }}/retronas-docker
             #ghcr.io/${{ github.repository_owner }}/retronas-docker    
           # Generate Docker tags based on the following events/attributes
@@ -108,9 +108,9 @@ jobs:
         # against the sigstore community Fulcio instance.
         run: echo "${TAGS}" | xargs -I {} cosign sign --yes {}@${DIGEST}
 
-      - uses: softprops/action-gh-release@v2.0.8
-        with:
-          tag_name: ${{ steps.extract-version.outputs.PIHOLE_VERSION }}
-          body: |
+     # - uses: softprops/action-gh-release@v2.0.8
+        #with:
+          #tag_name: ${{ steps.extract-version.outputs.PIHOLE_VERSION }}
+          #body: |
 
             
