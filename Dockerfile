@@ -1,12 +1,12 @@
 FROM debian:latest
 # Create a home directory for the user
-#RUN useradd -u -p raspberry -m pi
-#RUN usermod -aG sudo pi
-#USER pi
+RUN useradd -m -s /bin/bash pi
+RUN usermod -aG sudo pi
+USER pi
 # Create a volume for the home directory
 VOLUME /home/pi
 ## Set the working directory
-#WORKDIR /home/myuser
+WORKDIR /home/myuser
 RUN apt-get update
 RUN apt-get full-upgrade
 RUN apt-get upgrade
