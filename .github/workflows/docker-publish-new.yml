@@ -6,9 +6,10 @@ name: Publish Docker Images to DockerHub and Github
 # documentation.
 
 on:
+  workflow_dispatch:  # Manual trigger
+  
   schedule:
     - cron: '26 7 * * *'
-  workflow_dispatch:  # Manual trigger
   push:
     branches: [ "main" ]
     # Publish semver tags as releases.
@@ -16,8 +17,16 @@ on:
   pull_request:
     branches: [ "main" ]
 
+env:
+  # Use docker.io for Docker Hub if empty
+  REGISTRY: docker.io #ghcr.io
+  # github.repository as <account>/<repo>
+  IMAGE_NAME: ${{ github.repository }}
+
+
 jobs:
   build:
+
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -86,17 +95,18 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           platforms: linux/amd64,linux/arm64
-          push: true
-          user/app:latest
-          user/app:1.0.0
-          ghcr.io/user/app:latest
-          ghcr.io/user/app:1.0.0
-          tags: ${{ steps.meta.outputs.tags }}
+          push: ${{ github.event_name != 'pull_request' }}
+          tags:
+            user/app:latest
+            user/app:1.0.0
+            ghcr.io/user/app:latest
+            ghcr.io/user/app:1.0.0
+            ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-     # Sign the resulting Docker image digest except on PRs.
+      # Sign the resulting Docker image digest except on PRs.
       # This will only write to the public Rekor transparency log when the Docker
       # repository is public to avoid leaking data.  If you would like to publish
       # transparency data even for private images, pass --force to cosign below.
@@ -110,10 +120,3 @@ jobs:
         # This step uses the identity token to provision an ephemeral certificate
         # against the sigstore community Fulcio instance.
         run: echo "${TAGS}" | xargs -I {} cosign sign --yes {}@${DIGEST}
-
-
-
-
-      
-
- 
