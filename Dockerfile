@@ -18,7 +18,7 @@ RUN apt-get install -y python3-markupsafe python3-mdurl python3-minimal python3-
 RUN apt-get install -y python3-pkg-resources python3-pygments python3-pyparsing python3-requests python3-requests-kerberos
 RUN apt-get install -y python3-requests-ntlm python3-requests-toolbelt python3-resolvelib python3-rfc3986 python3-rich python3-selinux
 RUN apt-get install -y python3-simplejson python3-six python3-sniffio python3-tz python3-urllib3 python3-winrm python3-xmltodict
-RUN apt-get install -y python3-yaml python3.11 python3.11-minimal xauth cowsay sshpass gettext-base git-daemon-run git-daemon-sysvinit
+RUN apt-get install -y cowsay sshpass gettext-base
 RUN apt-get install -y git-doc git-email git-gui gitk gitweb git-cvs git-mediawiki git-svn gdbm-l10n keychain libpam-ssh monkeysphere
 RUN apt-get install -y ssh-askpass ed diffutils-doc perl-doc libterm-readline-gnu-perl libterm-readline-perl-perl make libtap-harness-archive-perl
 RUN apt-get install -y python3-doc python3-tk python3-venv python-cryptography-doc python3-cryptography-vectors python3-trio python3-aioquic
