@@ -28,8 +28,8 @@ RUN curl -o /tmp/install_retronas.sh https://raw.githubusercontent.com/danmons/r
 RUN chmod a+x /tmp/install_retronas.sh
 RUN /tmp/install_retronas.sh
 #This is a entrypoint to use while working on this
-ENTRYPOINT ["tail", "-f", "/dev/null"]
+#ENTRYPOINT ["tail", "-f", "/dev/null"]
 # This entrypoint seems wrong as its interactive. Will likely change
 # ENTRYPOINT ["/opt/retronas/retronas.sh"]
-#ENTRYPOINT ["/sbin/init"]
+ENTRYPOINT ["/sbin/init"]
 USER pi
