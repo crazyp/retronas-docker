@@ -1,5 +1,6 @@
 FROM debian:latest
 RUN apt-get update && apt-get install -y curl
+RUN apt install -y passwd
 # Create a home directory for the user
 RUN useradd -m -s /bin/bash pi
 RUN echo "pi:raspberry" | chpasswd
