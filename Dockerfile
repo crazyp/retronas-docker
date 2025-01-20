@@ -3,7 +3,7 @@ RUN apt-get update && apt-get install -y curl
 # Create a home directory for the user
 RUN useradd -m -s /bin/bash pi
 RUN usermod -aG sudo pi
-#USER pi
+
 # Create a volume for the home directory
 VOLUME /home/pi
 ## Set the working directory
@@ -13,8 +13,10 @@ RUN apt-get update && \
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
 RUN curl -o /tmp/install_retronas.sh https://raw.githubusercontent.com/danmons/retronas/main/install_retronas.sh
 RUN chmod a+x /tmp/install_retronas.sh
+RUN apt -y install sudo iproute2
 RUN /tmp/install_retronas.sh
 #This is a entrypoint to use while working on this
 ENTRYPOINT ["tail", "-f", "/dev/null"]
 # This entrypoint seems wrong as its interactive. Will likely change
 # ENTRYPOINT ["/opt/retronas/retronas.sh"]
+USER pi
