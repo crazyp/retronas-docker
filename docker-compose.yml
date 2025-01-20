@@ -2,7 +2,7 @@ version: "3.5"
 
 services:
   retronas:
-    image: natewalck/retronas:main
+    image: crazyp/retronas-docker:main
     container_name: retronas
     ports:
     - 445:445
