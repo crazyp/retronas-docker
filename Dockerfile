@@ -5,7 +5,6 @@ RUN apt install -y passwd
 RUN useradd -m -s /bin/bash pi
 RUN usermod -a -G sudo pi
 RUN adduser pi sudo
-RUN echo 'root:root' | sudo chpasswd
 # Create a volume for the home directory
 VOLUME /home/pi
 ## Set the working directory
