@@ -21,7 +21,7 @@ WORKDIR /home/pi
 #VOLUME data
 RUN apt-get install -y systemd systemd-sysv dbus dbus-user-session
 RUN apt update
- TUN apt install apt-utils build-essential sudo iproute2 ca-certificates krb5-locales openssl iproute2-doc binutils binfmt-support
+RUN apt install apt-utils build-essential sudo iproute2 ca-certificates krb5-locales openssl iproute2-doc binutils binfmt-support
 #RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
 RUN printf "systemctl start systemd-logind" >> /etc/profile
 RUN curl -o /tmp/install_retronas.sh https://raw.githubusercontent.com/danmons/retronas/main/install_retronas.sh
