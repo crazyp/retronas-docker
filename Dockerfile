@@ -3,7 +3,6 @@ RUN apt-get update && apt-get install -y curl
 RUN apt install -y passwd
 # Create a home directory for the user
 RUN useradd -m -s /bin/bash pi
-RUN echo "pi:raspberry" | chpasswd
 RUN usermod -a -G sudo pi
 RUN adduser pi sudo
 RUN echo 'root:root' | sudo chpasswd
