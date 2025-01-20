@@ -1,9 +1,9 @@
 FROM debian:latest
 RUN apt-get update && apt-get install -y curl
 # Create a home directory for the user
-RUN useradd -m -s -praspberry /bin/bash pi
+RUN useradd -m -s /bin/bash pi
+RUN echo "pi:raspberry" | chpasswd
 RUN usermod -aG sudo pi
-
 # Create a volume for the home directory
 VOLUME /home/pi
 ## Set the working directory
