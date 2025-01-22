@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM trfore/docker-ubuntu2204-systemd:latest
 ENV container docker
 ARG USERNAME=pi
 ARG USER_UID=1000
