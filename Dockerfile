@@ -20,8 +20,8 @@ WORKDIR /home/pi
 # Create retronas volumes
 #VOLUME opt/retronas
 #VOLUME data
-RUN apt-get install -y systemd make csh g++ sed gawk autotools-dev systemd-sysv dbus dbus-user-session autoconf automake gcc git go-md2man libmount-dev libselinux1-dev libselinux1 libyajl-dev lighttpd
 RUN apt-get update
+RUN apt-get install -y pkg-config nasm libtool systemd make csh g++ sed gawk autotools-dev systemd-sysv dbus dbus-user-session autoconf automake gcc git go-md2man libmount-dev libselinux1-dev libselinux1 libyajl-dev lighttpd
 RUN apt-get install -y apt-utils build-essential sudo iproute2 ca-certificates krb5-locales openssl iproute2-doc binutils binfmt-support
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
 RUN cd ~
