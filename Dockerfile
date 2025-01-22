@@ -1,4 +1,5 @@
 FROM debian:latest
+ENV container docker
 ARG USERNAME=pi
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
@@ -19,7 +20,7 @@ WORKDIR /home/pi
 # Create retronas volumes
 #VOLUME opt/retronas
 #VOLUME data
-RUN apt-get install -y systemd systemd-sysv dbus dbus-user-session autoconf automake gcc git go-md2man libmount-devel libselinux-devel yajl-devel httpd
+RUN apt-get install -y systemd systemd-sysv dbus dbus-user-session autoconf automake gcc git go-md2man libmount-dev libselinux1-dev libselinux1 libyajl-dev lighttpd
 RUN apt-get update
 RUN apt-get install -y apt-utils build-essential sudo iproute2 ca-certificates krb5-locales openssl iproute2-doc binutils binfmt-support
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
@@ -30,6 +31,7 @@ RUN autoreconf -i
 RUN ./configure --libexecdir=/usr/libexec/oci/hooks.d
 RUN make
 RUN make install
+RUN systemctl mask dnf-makecache.timer && systemctl enable lighttpd
 RUN printf "systemctl start systemd-logind" >> /etc/profile
 RUN curl -o /tmp/install_retronas.sh https://raw.githubusercontent.com/danmons/retronas/main/install_retronas.sh
 RUN chmod a+x /tmp/install_retronas.sh
