@@ -24,14 +24,14 @@ RUN apt-get update
 RUN apt-get install -y pkg-config nasm libtool systemd make csh g++ sed gawk autotools-dev systemd-sysv dbus dbus-user-session autoconf automake gcc git go-md2man libmount-dev libselinux1-dev libselinux1 libyajl-dev lighttpd
 RUN apt-get install -y apt-utils build-essential sudo iproute2 ca-certificates krb5-locales openssl iproute2-doc binutils binfmt-support
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
-RUN cd ~
-RUN git clone https://github.com/projectatomic/oci-systemd-hook
-RUN cd oci-systemd-hook
-RUN autoreconf -i
-RUN ./configure --libexecdir=/usr/libexec/oci/hooks.d
-RUN make
-RUN make install
-RUN systemctl mask dnf-makecache.timer && systemctl enable lighttpd
+#RUN cd ~
+#RUN git clone https://github.com/projectatomic/oci-systemd-hook
+#RUN cd oci-systemd-hook
+#RUN autoreconf -i
+#RUN ./configure --libexecdir=/usr/libexec/oci/hooks.d
+#RUN make
+#RUN make install
+#RUN systemctl mask dnf-makecache.timer && systemctl enable lighttpd
 RUN printf "systemctl start systemd-logind" >> /etc/profile
 RUN curl -o /tmp/install_retronas.sh https://raw.githubusercontent.com/danmons/retronas/main/install_retronas.sh
 RUN chmod a+x /tmp/install_retronas.sh
