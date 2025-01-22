@@ -1,0 +1,4 @@
+EXPOSE 22
+
+ENTRYPOINT ["/opt/init-wrapper/sbin/entrypoint.sh"]
+CMD ["/sbin/init"]
