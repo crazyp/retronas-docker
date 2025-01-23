@@ -64,19 +64,12 @@ jobs:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
 
-      - name: Docker meta
+      - name: Extract metadata for the Docker image
         id: meta
-        uses: docker/metadata-action@v5
+        uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
         with:
-          images: |
-            crazyp83/retronas-docker
-          tags: |
-            type=ref,event=branch
-            type=ref,event=pr
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
-          flavor: |
-            latest
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+
 
       - name: Build and push Docker image
         id: push
@@ -87,10 +80,3 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-
-      #- name: Generate artifact attestation
-        #uses: actions/attest-build-provenance@v2
-        #with:
-          #subject-name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME}}
-          #subject-digest: ${{ steps.push.outputs.digest }}
-          #push-to-registry: true
