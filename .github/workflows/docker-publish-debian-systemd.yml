@@ -75,6 +75,9 @@ jobs:
             type=ref,event=pr
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
+        with:
+          flavor: |
+            latest
 
       - name: Build and push Docker image
         id: push
