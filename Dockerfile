@@ -22,8 +22,8 @@ WORKDIR /home/pi
 RUN curl -o /tmp/install_retronas.sh https://raw.githubusercontent.com/danmons/retronas/main/install_retronas.sh
 RUN chmod a+x /tmp/install_retronas.sh
 RUN /tmp/install_retronas.sh
-RUN echo "su - pi" >> "/opt/init-wrapper/sbin/entrypoint.sh"
-RUN echo "root  ALL = NOPASSWD: /bin/su ALL" >> /etc/sudoers
+#RUN echo "su - pi" >> "/opt/init-wrapper/sbin/entrypoint.sh"
+#RUN echo "root  ALL = NOPASSWD: /bin/su ALL" >> /etc/sudoers
 EXPOSE 22
 # This entrypoint seems wrong as its interactive. Will likely change
 # ENTRYPOINT ["/opt/retronas/retronas.sh"]
