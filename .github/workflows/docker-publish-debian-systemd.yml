@@ -63,7 +63,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ vars.DOCKER_USERNAME }}/retronas-docker
+          images: ${{ vars.DOCKERHUB_USERNAME }}/retronas-docker
 
 
       - name: Build and push Docker image
