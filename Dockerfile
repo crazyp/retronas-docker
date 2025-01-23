@@ -26,5 +26,5 @@ RUN /tmp/install_retronas.sh
 # This entrypoint seems wrong as its interactive. Will likely change
 # ENTRYPOINT ["/opt/retronas/retronas.sh"]
 ENTRYPOINT ["/opt/init-wrapper/sbin/entrypoint.sh"]
-CMD ["/sbin/init"]
+#CMD ["/sbin/init"]
 USER pi
