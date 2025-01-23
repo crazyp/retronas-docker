@@ -21,7 +21,7 @@ env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: docker.io
    #github.repository as crazyp/retronas-docker
-  IMAGE_NAME: retronas-docker
+  IMAGE_NAME: ${{ docker.repository }}
 
 
 jobs:
@@ -64,13 +64,12 @@ jobs:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
 
-      - name: Extract metadata for the Docker image
+      - name: Extract Docker image metadata
         id: meta
-        uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
+        uses: docker/metadata-action@v5
         with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-        tags:
-          type=raw,value=crazyp83/retronas-docker:debian
+          images: ${{ vars.DOCKER_USERNAME }}/my-image
+
 
       - name: Build and push Docker image
         id: push
@@ -81,3 +80,6 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          annotations: ${{ steps.meta.outputs.annotations }}
+          provenance: true
+          sbom: true
