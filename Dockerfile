@@ -1,5 +1,5 @@
 FROM minimum2scp/systemd-bookworm:latest
-RUN apt-get install software-properties-common \
+RUN apt-get install -y software-properties-common \
     && apt-add-repository contrib \
     && apt-add-repository non-free \
     && apt-get update \
