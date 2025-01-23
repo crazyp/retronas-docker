@@ -12,16 +12,11 @@ on:
     - cron: '26 7 * * *'
   push:
     branches: [ "main" ]
-    # Publish semver tags as releases.
-    tags: [ 'v*.*.*' ]
+    
   pull_request:
     branches: [ "main" ]
 
-env:
-  # Use docker.io for Docker Hub if empty
-  REGISTRY: docker.io
-   #github.repository as crazyp/retronas-docker
-  IMAGE_NAME: ${{ docker.repository }}
+
 
 
 jobs:
