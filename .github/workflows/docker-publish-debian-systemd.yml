@@ -20,7 +20,7 @@ on:
 env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: docker.io
-   github.repository as crazyp/retronas-docker
+   #github.repository as crazyp/retronas-docker
   IMAGE_NAME: ${{ github.repository }}
 
 
