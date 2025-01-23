@@ -21,10 +21,10 @@ RUN apt-get install -y apt-utils build-essential iproute2 ca-certificates krb5-l
 RUN curl -o /tmp/install_retronas.sh https://raw.githubusercontent.com/danmons/retronas/main/install_retronas.sh
 RUN chmod a+x /tmp/install_retronas.sh
 RUN /tmp/install_retronas.sh
-
-
+RUN echo "su - pi" >> /opt/init-wrapper/sbin/entrypoint.sh
+RUN echo "root  ALL = NOPASSWD: /bin/su ALL" >> /etc/sudoers
 # This entrypoint seems wrong as its interactive. Will likely change
 # ENTRYPOINT ["/opt/retronas/retronas.sh"]
 ENTRYPOINT ["/opt/init-wrapper/sbin/entrypoint.sh"]
 #CMD ["/sbin/init"]
-USER pi
+#USER pi
