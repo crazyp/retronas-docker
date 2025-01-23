@@ -68,7 +68,13 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: crazyp/retronas-docker
+          images: |
+            crazyp83/retronas-docker
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
 
       - name: Build and push Docker image
         id: push
