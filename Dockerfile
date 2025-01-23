@@ -27,4 +27,4 @@ RUN /tmp/install_retronas.sh
 # ENTRYPOINT ["/opt/retronas/retronas.sh"]
 ENTRYPOINT ["/opt/init-wrapper/sbin/entrypoint.sh"]
 CMD ["/sbin/init"]
-#USER pi
+USER pi
