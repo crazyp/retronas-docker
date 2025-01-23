@@ -3,7 +3,7 @@ RUN apt-get install -y software-properties-common \
     && apt-add-repository contrib \
     && apt-add-repository non-free \
     && apt-get update \
-    && apt-get install -y coreutils util-linux dpkg sed base-passwd sudo curl passwd apt-utils build-essential iproute2 ca-certificates krb5-locales openssl iproute2-doc binutils binfmt-support nano openssh-server
+    && apt-get install -y coreutils util-linux dpkg sed base-passwd sudo curl passwd apt-utils build-essential iproute2 openssl iproute2-doc binutils binfmt-support nano openssh-server
 ARG USERNAME=pi
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
@@ -15,7 +15,7 @@ RUN groupadd --gid $USER_GID $USERNAME \
 # Create a volume for the home directory
 VOLUME /home/pi
 ## Set the working directory
-WORKDIR /home/pi
+#WORKDIR /home/pi
 # Create retronas volumes
 #VOLUME opt/retronas
 #VOLUME data
@@ -24,9 +24,9 @@ RUN chmod a+x /tmp/install_retronas.sh
 RUN /tmp/install_retronas.sh
 #RUN echo "su - pi" >> "/opt/init-wrapper/sbin/entrypoint.sh"
 #RUN echo "root  ALL = NOPASSWD: /bin/su ALL" >> /etc/sudoers
-EXPOSE 22
+
 # This entrypoint seems wrong as its interactive. Will likely change
 # ENTRYPOINT ["/opt/retronas/retronas.sh"]
 ENTRYPOINT ["/opt/init-wrapper/sbin/entrypoint.sh"]
-#CMD ["/sbin/init"]
+CMD ["/sbin/init"]
 #USER pi
