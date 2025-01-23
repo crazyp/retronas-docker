@@ -1,4 +1,4 @@
-name: Publish Docker Images to DockerHub and Github
+name: Publish Docker Image systemd to DockerHub
 
 # This workflow uses actions that are not certified by GitHub.
 # They are provided by a third-party and are governed by
