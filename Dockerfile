@@ -1,8 +1,9 @@
 FROM minimum2scp/systemd-bookworm:latest
-RUN apt-add-repository contrib \
+RUN apt-get install software-properties-common \
+    && apt-add-repository contrib \
     && apt-add-repository non-free \
     && apt-get update \
-    && apt-get install -y coreutils util-linux dpkg sed software-properties-common base-passwd sudo curl passwd apt-utils build-essential iproute2 ca-certificates krb5-locales openssl iproute2-doc binutils binfmt-support nano openssh-server
+    && apt-get install -y coreutils util-linux dpkg sed base-passwd sudo curl passwd apt-utils build-essential iproute2 ca-certificates krb5-locales openssl iproute2-doc binutils binfmt-support nano openssh-server
 ARG USERNAME=pi
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
