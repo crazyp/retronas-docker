@@ -22,7 +22,7 @@ RUN useradd -m -s /bin/bash -N -u $UID $USER && \
     echo "${USER} ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers && \
     chmod 0440 /etc/sudoers && \
     chmod g+w /etc/passwd \
-    adduser pi sudo
+    usermod -a -G sudo pi
 
 #ENTRYPOINT ["entrypoint.sh"]
 
