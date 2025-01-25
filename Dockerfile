@@ -19,7 +19,7 @@ ENV HOME=/home/${USER}
 
 # Create user and setup permissions on /etc/sudoers
 RUN useradd -m -s /bin/bash -N -u $UID $USER && \
-    echo "${USER} ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers && \
+    echo "${USER} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
     chmod 0440 /etc/sudoers && \
     chmod g+w /etc/passwd && \
     usermod -a -G sudo pi
