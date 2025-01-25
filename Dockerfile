@@ -1,9 +1,40 @@
 FROM crazyp83/systemd-bookworm:latest
-RUN apt-get install -y software-properties-common \
+RUN apt-get update && apt-get install -y software-properties-common \
     && apt-add-repository contrib \
     && apt-add-repository non-free \
     && apt-get update \
-    && apt-get install -y coreutils util-linux dpkg sed base-passwd sudo curl passwd apt-utils build-essential iproute2 openssl iproute2-doc binutils binfmt-support nano openssh-server
+    && apt-get install -y sudo coreutils util-linux dpkg sed base-passwd sudo curl passwd apt-utils build-essential iproute2 openssl iproute2-doc binutils binfmt-support nano openssh-server
+
+ENV DEBIAN_FRONTEND noninteractive
+ARG USER=pi
+ARG UID=1000
+ARG GID=1000
+ARG TINI=v0.18.0
+
+
+
+# Set environment variables
+ENV USER                ${USER}
+ENV HOME                /home/${USER}
+
+# Create user and setup permissions on /etc/sudoers
+RUN useradd -m -s /bin/bash -N -u $UID $USER && \
+    echo "${USER} ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers && \
+    chmod 0440 /etc/sudoers && \
+    chmod g+w /etc/passwd 
+
+#ENTRYPOINT ["entrypoint.sh"]
+
+
+# Copy necessary files
+COPY opt/init-wrapper/sbin/entrypoint.sh /usr/local/bin/
+
+# Set workdir and switch back to non-root user
+WORKDIR $HOME
+USER ${UID}
+
+
+
 # Create retronas volumes
 #VOLUME opt/retronas/config
 #VOLUME data
@@ -14,4 +45,4 @@ RUN /tmp/install_retronas.sh
 # ENTRYPOINT ["/opt/retronas/retronas.sh"]
 ENTRYPOINT ["/opt/init-wrapper/sbin/entrypoint.sh"]
 CMD ["/sbin/init"]
-#USER pi
+#CMD ["bash"]
