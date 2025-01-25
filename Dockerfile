@@ -5,23 +5,25 @@ RUN apt-get update && apt-get install -y software-properties-common \
     && apt-get update \
     && apt-get install -y sudo coreutils util-linux dpkg sed base-passwd sudo curl passwd apt-utils build-essential iproute2 openssl iproute2-doc binutils binfmt-support nano openssh-server
 
-ENV DEBIAN_FRONTEND=noninteractive
-ARG USER=pi
-ARG UID=1000
-ARG GID=1000
-ARG TINI=v0.18.0
+#ENV DEBIAN_FRONTEND=noninteractive
+#ARG USER=pi
+#ARG UID=1000
+#ARG GID=1000
+#ARG TINI=v0.18.0
 
 
 
 # Set environment variables
-ENV USER=${USER}
-ENV HOME=/home/${USER}
+#ENV USER=${USER}
+#ENV HOME=/home/${USER}
 
 # Create user and setup permissions on /etc/sudoers
-RUN useradd -m -s /bin/bash -N -u $UID $USER && \
-    echo "${USER} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
+RUN groupadd -g 1000 pi
+RUN useradd -m -s /bin/bash -N -u 1000 pi && \
+    echo "pi ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers && \
     chmod 0440 /etc/sudoers && \
     chmod g+w /etc/passwd && \
+    usermod -g pi pi && \
     usermod -a -G sudo pi
 
 #ENTRYPOINT ["entrypoint.sh"]
