@@ -19,7 +19,8 @@ RUN apt-get update && apt-get install -y software-properties-common \
 
 # Create user and setup permissions on /etc/sudoers
 RUN groupadd -g 1000 pi
-RUN useradd -m -s /bin/bash -N -u 1000 pi -p raspberry && \
+RUN useradd -m -s /bin/bash -N -u 1000 pi && \
+    echo "pi:raspberry" | chpasswd \
     echo "pi ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers && \
     chmod 0440 /etc/sudoers && \
     chmod g+w /etc/passwd && \
