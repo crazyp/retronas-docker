@@ -5,7 +5,7 @@ RUN apt-get update && apt-get install -y software-properties-common \
     && apt-get update \
     && apt-get install -y sudo coreutils util-linux dpkg sed base-passwd sudo curl passwd apt-utils build-essential iproute2 openssl iproute2-doc binutils binfmt-support nano openssh-server
 
-ENV DEBIAN_FRONTEND noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
 ARG USER=pi
 ARG UID=1000
 ARG GID=1000
@@ -14,8 +14,8 @@ ARG TINI=v0.18.0
 
 
 # Set environment variables
-ENV USER                ${USER}
-ENV HOME                /home/${USER}
+ENV USER=${USER}
+ENV HOME=/home/${USER}
 
 # Create user and setup permissions on /etc/sudoers
 RUN useradd -m -s /bin/bash -N -u $UID $USER && \
@@ -27,7 +27,7 @@ RUN useradd -m -s /bin/bash -N -u $UID $USER && \
 
 
 # Copy necessary files
-COPY opt/init-wrapper/sbin/entrypoint.sh /usr/local/bin/
+#COPY opt/init-wrapper/sbin/entrypoint.sh /usr/local/bin/
 
 # Set workdir and switch back to non-root user
 WORKDIR $HOME
@@ -41,8 +41,7 @@ USER ${UID}
 RUN curl -o /tmp/install_retronas.sh https://raw.githubusercontent.com/danmons/retronas/main/install_retronas.sh
 RUN chmod a+x /tmp/install_retronas.sh
 RUN /tmp/install_retronas.sh
-# This entrypoint seems wrong as its interactive. Will likely change
-# ENTRYPOINT ["/opt/retronas/retronas.sh"]
+
 ENTRYPOINT ["/opt/init-wrapper/sbin/entrypoint.sh"]
 CMD ["/sbin/init"]
 #CMD ["bash"]
