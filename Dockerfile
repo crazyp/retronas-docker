@@ -32,7 +32,7 @@ RUN useradd -m -s /bin/bash -N -u $UID $USER && \
 
 # Set workdir and switch back to non-root user
 WORKDIR $HOME
-USER ${UID}
+#USER ${UID}
 
 
 
@@ -40,8 +40,8 @@ USER ${UID}
 #VOLUME opt/retronas/config
 #VOLUME data
 RUN curl -o /tmp/install_retronas.sh https://raw.githubusercontent.com/danmons/retronas/main/install_retronas.sh
-RUN sudo chmod a+x /tmp/install_retronas.sh
-RUN sudo /tmp/install_retronas.sh
+RUN chmod a+x /tmp/install_retronas.sh
+RUN /tmp/install_retronas.sh
 
 ENTRYPOINT ["/opt/init-wrapper/sbin/entrypoint.sh"]
 CMD ["/sbin/init"]
