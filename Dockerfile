@@ -5,17 +5,9 @@ RUN apt-get update && apt-get install -y software-properties-common \
     && apt-get update \
     && apt-get install -y sudo coreutils util-linux dpkg sed base-passwd sudo curl passwd apt-utils build-essential iproute2 openssl iproute2-doc binutils binfmt-support nano openssh-server
 
-#ENV DEBIAN_FRONTEND=noninteractive
-#ARG USER=pi
-#ARG UID=1000
-#ARG GID=1000
-#ARG TINI=v0.18.0
+ENV LANG=en_US.UTF-8
 
 
-
-# Set environment variables
-#ENV USER=${USER}
-#ENV HOME=/home/${USER}
 
 # Create user and setup permissions on /etc/sudoers
 RUN groupadd -g 1000 pi
