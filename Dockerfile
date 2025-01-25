@@ -21,7 +21,8 @@ ENV HOME=/home/${USER}
 RUN useradd -m -s /bin/bash -N -u $UID $USER && \
     echo "${USER} ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers && \
     chmod 0440 /etc/sudoers && \
-    chmod g+w /etc/passwd 
+    chmod g+w /etc/passwd \
+    adduser pi sudo
 
 #ENTRYPOINT ["entrypoint.sh"]
 
