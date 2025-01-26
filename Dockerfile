@@ -19,17 +19,6 @@ RUN useradd -m -s /bin/bash -N -u 1000 pi && \
     usermod -g pi pi && \
     usermod -a -G sudo pi
 
-#ENTRYPOINT ["entrypoint.sh"]
-
-
-# Copy necessary files
-#COPY opt/init-wrapper/sbin/entrypoint.sh /usr/local/bin/
-
-# Set workdir and switch back to non-root user
-WORKDIR $HOME
-#USER ${UID}
-
-
 
 # Create retronas volumes
 #VOLUME opt/retronas/config
