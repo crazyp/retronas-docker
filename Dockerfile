@@ -3,7 +3,11 @@ FROM crazyp83/systemd-bookworm:latest
 
 ENV LANG=en_US.UTF-8
 
-
+RUN apt-get update && apt-get install -y software-properties-common \
+    && apt-add-repository contrib \
+    && apt-add-repository non-free \
+    && apt-get update \
+    && apt-get install -y sudo coreutils util-linux dpkg sed base-passwd sudo curl passwd apt-utils build-essential iproute2 openssl iproute2-doc binutils binfmt-support nano openssh-server
 
 # Create user and setup permissions on /etc/sudoers
 RUN groupadd -g 1000 pi
