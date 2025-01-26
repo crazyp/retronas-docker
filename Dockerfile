@@ -9,6 +9,16 @@ RUN apt-get update && apt-get install -y software-properties-common \
     && apt-get update \
     && apt-get install -y sudo coreutils util-linux dpkg sed base-passwd sudo curl passwd apt-utils build-essential iproute2 openssl iproute2-doc binutils binfmt-support nano openssh-server
 
+## set locale
+RUN echo "LC_ALL=en_US.UTF-8" >> /etc/environment
+RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
+RUN echo "LANG=en_US.UTF-8" > /etc/locale.conf
+RUN apt-get clean && apt-get update -y
+RUN apt-get install locales -y
+RUN locale-gen en_US.UTF-8
+
+
+
 # Create user and setup permissions on /etc/sudoers
 #RUN groupadd -g 1000 pi
 #RUN useradd -m -s /bin/bash -N -u 1000 #pi && \
